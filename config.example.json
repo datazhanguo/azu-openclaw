@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.15",
+    "lastTouchedAt": "2026-02-17T00:00:00.000Z"
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8
+      },
+      "model": {
+        "primary": "kimicode/kimi-k2.5"
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "change-me-to-your-token"
+    },
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "nodes": {
+      "denyCommands": [
+        "camera.snap",
+        "camera.clip",
+        "screen.record"
+      ]
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  },
+  "tools": {
+    "web": {
+      "search": {
+        "provider": "brave",
+        "apiKey": "YOUR-BRAVE-SEARCH-API-KEY"
+      }
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "kimicode": {
+        "baseUrl": "https://api.kimi.com/coding",
+        "apiKey": "YOUR-KIMI-API-KEY",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "minimax": {
+        "baseUrl": "https://api.minimaxi.com/anthropic",
+        "apiKey": "YOUR-MINIMAX-API-KEY",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "MiniMax-M2.5",
+            "name": "MiniMax M2.5",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 15,
+              "output": 60
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      },
+      "glmcode": {
+        "baseUrl": "https://open.bigmodel.cn/api/anthropic",
+        "apiKey": "YOUR-GLM-API-KEY",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "glm-4.7",
+            "name": "GLM-4.7",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": {
+              "input": 0,
+              "output": 0
+            },
+            "contextWindow": 200000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "channels": {
+    "feishu": {
+      "enabled": true,
+      "appId": "YOUR-FEISHU-APP-ID",
+      "appSecret": "YOUR-FEISHU-APP-SECRET",
+      "domain": "feishu",
+      "groupPolicy": "open"
+    }
+  }
+}
